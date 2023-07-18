@@ -1,0 +1,33 @@
+.todo-item {
+    margin: 1rem 0;
+    background: #8b005d;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    padding: 1rem 2rem;    
+    align-items: center;
+    display: flex;
+}
+.mark-as-completed{
+    text-decoration: line-through;
+}
+
+.completed-checkbox {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.todoTitle {
+    flex-wrap: wrap;
+    overflow-wrap: break-word;
+    display: flex;
+    flex-grow: 8;
+    color: white;
+}
+
+.todo-icon {
+    display: flex;    
+    cursor: pointer;
+}
+
+.pencil-icon {
+    margin-right: 10px;
+}

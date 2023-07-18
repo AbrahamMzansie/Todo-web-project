@@ -7,12 +7,16 @@ const TodoContext = createContext<TodoContextObj>(
         retriveAllTodoList: () => { },
         createNewTodo: (todo: string) => { },
         onDeleteTodoHandler: (id: number) => { },
-        onEditTodoHandler: (id: number, newTitle: string) => { }
+        onEditTodoHandler: (id: number, newTitle: string) => { },
+        completedTodoHandler: (id: number, isCompleted: boolean) => { }
     }
 );
 
 const Provider = ({ children }: ProviderProps) => {
-    const [todoList, setTodoList] = useState<ITodo[]>([]);
+
+    const storedItems= localStorage.getItem("todos");
+    const parsedData :ITodo[] = storedItems ? JSON.parse(storedItems) : [];
+    const [todoList, setTodoList] = useState<ITodo[]>(parsedData);
 
     const retriveAllTodoList = () => {
 
@@ -21,10 +25,11 @@ const Provider = ({ children }: ProviderProps) => {
 
     const createNewTodo = (todo: string) => {
         const todoObj: ITodo = {
-            id: 1,
+            id: Math.random(),
             completed: false,
             title: todo,
-        }
+        }       
+       
         setTodoList(prevTodo => {
             return prevTodo.concat(todoObj)
         });
@@ -32,10 +37,10 @@ const Provider = ({ children }: ProviderProps) => {
     }
 
     const onDeleteTodoHandler = (id: number) => {
-        // const updatedTodos = todoList.filter(item => {
-        //     return item.id !== id;
-        // });
-        // setTodoList(updatedTodos);
+        const updatedTodos = todoList.filter(item => {
+            return item.id !== id;
+        });
+        setTodoList(updatedTodos);
     }
     const onEditTodoHandler = (id: number, newTitle: string) => {
         // const updatedTodos = todoList.map((todo) => {
@@ -47,12 +52,29 @@ const Provider = ({ children }: ProviderProps) => {
         // setTodoList(updatedTodos);
     }
 
+    const completedTodoHandler = (id: number, isCompleted: boolean) => {
+        const updatedTodos = todoList.map((todo) => {
+            if (todo.id === id) {
+                const newTodo: ITodo = {
+                    ...todo,
+                    completed: isCompleted
+                }
+
+                return { ...todo, ...newTodo };
+            }
+            return todo;
+        });
+
+        setTodoList(updatedTodos);     
+    }
+
     const mapDataToProps: TodoContextObj = {
         todoList,
         retriveAllTodoList,
         createNewTodo,
         onDeleteTodoHandler,
-        onEditTodoHandler
+        onEditTodoHandler,
+        completedTodoHandler
     }
 
     return (

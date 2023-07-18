@@ -23,7 +23,7 @@ const TodoForm: FC = () => {
         <label>New Todo Name</label>
         <input value = {todoTitle} type="text" onChange={onInputChangeHandler} />
       </div>
-      <button type="submit">Add Todo</button>      
+      <button className='button' type="submit">Add Todo</button>      
     </form>
   );
 }
