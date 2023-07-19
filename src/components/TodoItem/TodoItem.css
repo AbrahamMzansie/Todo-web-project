@@ -2,7 +2,7 @@
     margin: 1rem 0;
     background: #8b005d;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-    padding: 1rem 2rem;    
+    padding: .2rem .5rem;    
     align-items: center;
     display: flex;
 }
@@ -21,13 +21,19 @@
     display: flex;
     flex-grow: 8;
     color: white;
+    overflow-wrap: anywhere;
+    margin-right : 10px;
 }
 
 .todo-icon {
     display: flex;    
     cursor: pointer;
 }
+.delete-icon{
+    color :red;
+}
 
 .pencil-icon {
     margin-right: 10px;
+    color : blueviolet;
 }

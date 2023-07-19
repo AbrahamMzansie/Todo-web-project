@@ -4,18 +4,20 @@ import TodoList from './components/TodoList/TodoList';
 
 import TodoForm from './components/TodoForm/TodoForm';
 import UserTodosContext from './hooks/todo-context';
+import TodoEdit from './components/TodoEdit/TodoEdit';
 
 const App: FC = () => {
 
-  const { todoList } = UserTodosContext();
+  const { todoList, showCreateEditForm } = UserTodosContext();
 
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todoList));    
+    localStorage.setItem("todos", JSON.stringify(todoList));
   }, [todoList]);
+
   return (
     <div>
       <section id="todo-form">
-        <TodoForm />
+        {showCreateEditForm ? <TodoForm /> : <TodoEdit />}
       </section>
       <section id="todos">
         <TodoList />

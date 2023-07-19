@@ -1,28 +1,27 @@
 import React, { useState } from 'react'
 import TodoItem from '../TodoItem/TodoItem';
 import UserTodosContext from '../../hooks/todo-context';
-
-// import { GoPencil}  from "react-icons/fa";
-import { BiPencil, BiSolidTrash } from 'react-icons/bi';
-
+import { BiSolidTrash , BiPencil } from 'react-icons/bi';
 import "./TodoList.css";
 
-const TodoList = () => {
+
+const TodoList:React.FC = () => {
 
     const { todoList, completedTodoHandler,
-        onEditTodoHandler, onDeleteTodoHandler } = UserTodosContext();
+        onEditTodoHandler, onDeleteTodoHandler   } = UserTodosContext();
     const [completed, setCompleted] = useState<boolean>(false);
 
     const todoCompletedHandler = (id: number, event: { target: { checked: string | boolean | ((prevState: string | boolean | undefined) => string | boolean | undefined) | undefined; }; }) => {
-        setCompleted(Boolean(event.target.checked));        
+        setCompleted(Boolean(event.target.checked));
         completedTodoHandler(id, Boolean(event.target.checked));
     }
 
-    const editTodoHandler = (id: number, title: string) => {
-        onEditTodoHandler(id, title)
+    const editTodoHandler = (id: number, title: string) => {      
+        onEditTodoHandler(id , title);       
     }
     const deleteTodoHandler = (id: number) => {
-        onDeleteTodoHandler(id);
+        onDeleteTodoHandler(id);       
+        
     }
     return (
         <ul className="doto-list">
@@ -35,11 +34,12 @@ const TodoList = () => {
                         checked={todo.completed}
                         onChange={(event) => todoCompletedHandler(todo.id, event)} />
                     <div className="todoTitle">
-                        <p className={`${todo.completed && "mark-as-completed"}`}>{todo.title}  </p> </div>
-                    <div className="todo-icon" >
-                        {/* <BiPencil onClick={() => editTodoHandler(todo.id)} className='pencil-icon' /> */}
-                        <BiSolidTrash onClick={() => deleteTodoHandler(todo.id)} />
+                        <p className={`${todo.completed && "mark-as-completed"}`}>{todo.title}</p>
                     </div>
+                    <div className="todo-icon" >
+                        <BiPencil onClick={(e) => editTodoHandler(todo.id , todo.title)} className='pencil-icon' />
+                        <BiSolidTrash className='delete-icon' onClick={() => deleteTodoHandler(todo.id)} />
+                    </div>                 
                 </TodoItem>
             ))}
         </ul>
