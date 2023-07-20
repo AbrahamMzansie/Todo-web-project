@@ -1,5 +1,5 @@
 export interface ITodo {
-    id: number,
+    id: string,
     completed: boolean,
     title: string
 };
@@ -16,7 +16,7 @@ export interface TodoContextObj {
     setTodoTitle: (value: React.SetStateAction<string>) => void,
     updateToDoHandler :(title: string) => void,
     createNewTodo: (todo: string) => void,
-    onDeleteTodoHandler: (id: number) => void,
-    onEditTodoHandler: (id: number, newTitle: string) => void,
-    completedTodoHandler: (id: number, isCompleted: boolean) => void
+    onDeleteTodoHandler: (id: string) => void,
+    onEditTodoHandler: (id: string, newTitle: string) => void,
+    completedTodoHandler: (id: string, isCompleted: boolean) => void
 }

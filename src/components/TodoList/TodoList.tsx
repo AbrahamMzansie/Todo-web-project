@@ -11,15 +11,15 @@ const TodoList:React.FC = () => {
         onEditTodoHandler, onDeleteTodoHandler   } = UserTodosContext();
     const [completed, setCompleted] = useState<boolean>(false);
 
-    const todoCompletedHandler = (id: number, event: { target: { checked: string | boolean | ((prevState: string | boolean | undefined) => string | boolean | undefined) | undefined; }; }) => {
+    const todoCompletedHandler = (id: string, event: { target: { checked: string | boolean | ((prevState: string | boolean | undefined) => string | boolean | undefined) | undefined; }; }) => {
         setCompleted(Boolean(event.target.checked));
         completedTodoHandler(id, Boolean(event.target.checked));
     }
 
-    const editTodoHandler = (id: number, title: string) => {      
+    const editTodoHandler = (id: string, title: string) => {      
         onEditTodoHandler(id , title);       
     }
-    const deleteTodoHandler = (id: number) => {
+    const deleteTodoHandler = (id: string) => {
         onDeleteTodoHandler(id);       
         
     }
