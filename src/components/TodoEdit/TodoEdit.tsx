@@ -9,7 +9,8 @@ const TodoEdit = () => {
 
     const formSubmitHandler = (event: { preventDefault: () => void; }) => {
         event.preventDefault();
-        updateToDoHandler(todoTitle);   
+        updateToDoHandler(todoTitle);  
+        setShowCreateEditForm(true); 
         setTodoTitle("");     
     }
     const onInputChangeHandler = (event: { target: { value: React.SetStateAction<string>; }; }) => {
